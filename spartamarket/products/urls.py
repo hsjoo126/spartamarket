@@ -8,4 +8,6 @@ urlpatterns = [
     path("create/", views.create, name="create"),
     path("<int:pk>/", views.detail, name="detail"),
     path("<int:pk>/like", views.like, name="like"),
+    path("<int:pk>/update", views.update, name="update"),
+
 ]

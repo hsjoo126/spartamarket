@@ -37,3 +37,19 @@ def like(request, pk):
             product.like_users.add(request.user)
         return redirect("products:products")
     return redirect("accounts:login")
+
+def update(request, pk):
+    product = get_object_or_404(Products, pk=pk)
+    if request.method == "POST":
+        form = ProductsForm(request.POST, instance=product)
+        if form.is_valid():
+            product = form.save()
+            return redirect('products:detail', product.pk)
+    else:
+        form = ProductsForm(instance=product)
+    
+    context = { 
+        "form" : form ,
+        "product" : product
+        }
+    return render(request, 'products/update.html', context)

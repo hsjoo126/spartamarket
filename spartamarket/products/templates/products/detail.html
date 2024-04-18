@@ -6,6 +6,9 @@
 <p>제목:{{ products.title }}</p>
 <p>작성자: {{ products.author.username }}</p>
 <p>내용:{{ products.content }}</p>
+<a href="{% url "products:update" products.pk %}">
+    <button>수정하기</button>
+</a>
 <a href="{% url "products:products" %}">물건들 보러가기</a>
 
 {% endblock content %}
