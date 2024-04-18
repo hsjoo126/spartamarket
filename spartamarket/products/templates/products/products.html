@@ -5,8 +5,19 @@
 <h1>메인 물건 페이지입니다</h1>
 
 {% for product in products %}
-<p>[{{ product.id }}]{{ product.title }}</p>
-{% endfor %}
+    <p>[{{ product.id }}]{{ product.title }}</p>
+
+    <form action="{% url "products:like" product.pk %}" method="POST">
+        {% csrf_token %}
+        {% if request.user in product.like_users.all %}
+            <input type="submit" value="좋아요 취소">
+        {% else %}
+            <input type="submit" value="좋아요">
+        {% endif %}
+    </form>
+    <hr>
+
+    {% endfor %}
 
 {% endblock content %}
 

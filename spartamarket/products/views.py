@@ -27,3 +27,13 @@ def detail(request, pk):
     products = get_object_or_404(Products,pk = pk)
     context = { "products" : products }
     return render(request, "products/detail.html", context)
+
+def like(request, pk):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Products,pk=pk)
+        if product.like_users.filter(pk=request.user.pk).exists():
+            product.like_users.remove(request.user)
+        else:
+            product.like_users.add(request.user)
+        return redirect("products:products")
+    return redirect("accounts:login")
