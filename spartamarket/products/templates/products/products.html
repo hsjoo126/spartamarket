@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>메인 물건 페이지입니다</h1>
+
+{% for product in products %}
+<p>[{{ products.id }}]{{ products.title }}</p>
+{% endfor %}
+
+{% endblock content %}
+
