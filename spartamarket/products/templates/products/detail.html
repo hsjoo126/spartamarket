@@ -9,6 +9,12 @@
 <a href="{% url "products:update" products.pk %}">
     <button>수정하기</button>
 </a>
+
+<form action="{% url "products:delete" products.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제">
+</form>
+
 <a href="{% url "products:products" %}">물건들 보러가기</a>
 
 {% endblock content %}

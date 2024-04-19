@@ -53,3 +53,10 @@ def update(request, pk):
         "product" : product
         }
     return render(request, 'products/update.html', context)
+
+def delete(request, pk):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Products, pk=pk)
+        product.delete()
+        return redirect('products:products')
+    return redirect('products:detail', pk)
