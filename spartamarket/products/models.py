@@ -6,7 +6,7 @@ class Products(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
 
-    author = models.ForeignKey(
+    author = models.ForeignKey( #유저테이블이랑 포린키로 이미 엮여있다! ;;;
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="product"
     )
 

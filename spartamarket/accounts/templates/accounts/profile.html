@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>{{ member.username }}님의 프로필</h1>
-
+<h3>가입일:{{ member.created_at}}</h3>
 {% if request.user != member %}
     <form action="{% url "accounts:follow" member.pk %}" method="POST">
         {% csrf_token %}
@@ -13,5 +13,20 @@
         {% endif %}
     </form>
 {% endif %}
+
+<h3>등록한 물품</h3> 
+{% for product in member.product.all %}
+    <a href="{% url "products:detail" product.pk %}"> {{ product.title }} </a>
+    <br>
+    <hr>
+{% endfor %}
+
+<h3>내가 좋아요한 물건</h3> 
+{% for product in member.like_products.all %}
+    <a href="{% url "products:detail" product.pk %}"> {{ product.title }} </a>
+    <br>
+    <hr>
+{% endfor %}
+
 
 {% endblock content %}

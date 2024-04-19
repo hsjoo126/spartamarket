@@ -5,7 +5,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import get_user_model
-
+from .models import User
+from products.models import Products
 
 def login(request):
     form = AuthenticationForm(data=request.POST)
@@ -40,8 +41,10 @@ def test(request):
 
 
 def profile(request, username):
-    member = get_object_or_404(get_user_model(), username=username)
-    context = {"member": member}
+    member = get_object_or_404(get_user_model(), username=username) #유저 테이블 안에 있는 유저, 이미 프로덕트가 들어가 있다 ;;;;
+    context = {
+        "member": member,
+        }
     return render(request, 'accounts/profile.html', context)
 
 
