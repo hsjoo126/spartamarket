@@ -3,6 +3,9 @@
 {% block content %}
 <h1>{{ member.username }}님의 프로필</h1>
 <h3>가입일:{{ member.created_at}}</h3>
+<h3>팔로워 수: {{ member.followers.count }}</h3>
+<h3>팔로우 수: {{ member.following.count }}</h3>
+
 {% if request.user != member %}
     <form action="{% url "accounts:follow" member.pk %}" method="POST">
         {% csrf_token %}
