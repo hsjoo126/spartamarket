@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Products
 from .forms import ProductsForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST, require_http_methods
 # Create your views here.
 
 
@@ -9,6 +11,7 @@ def products(request):
     context = { "products" : products }
     return render(request, "products/products.html", context)
 
+@login_required
 def create(request):
     if request.method == "POST":
         form = ProductsForm(request.POST)
@@ -38,6 +41,7 @@ def like(request, pk):
         return redirect("products:products")
     return redirect("accounts:login")
 
+@login_required
 def update(request, pk):
     product = get_object_or_404(Products, pk=pk)
     if request.method == "POST":

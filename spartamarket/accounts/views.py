@@ -12,7 +12,7 @@ def login(request):
     form = AuthenticationForm(data=request.POST)
     if form.is_valid():
         auth_login(request, form.get_user())
-        return redirect("accounts:test")
+        return redirect("products:products")
     context = {"form": form}
     return render(request, "accounts/login.html", context)
 
@@ -20,7 +20,7 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)
-    return redirect("accounts:test")
+    return redirect("products:products")
 
 
 def signup(request):
@@ -29,15 +29,11 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect("accounts:test")
+            return redirect("products:products")
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
     return render(request, "accounts/signup.html", context)
-
-
-def test(request):
-    return render(request, "accounts/test.html")
 
 
 def profile(request, username):
